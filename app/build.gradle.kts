@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 android {
     namespace = "paba.c14220328.latihanrecyclerview"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "paba.c14220328.latihanrecyclerview"

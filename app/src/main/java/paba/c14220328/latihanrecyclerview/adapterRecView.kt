@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
@@ -17,8 +18,8 @@ class adapterRecView (private val listWayang: ArrayList<wayang>) : RecyclerView
         var _karakterWayang = itemView.findViewById<TextView>(R.id.karakterWayang)
         var _deskripsWayang = itemView.findViewById<TextView>(R.id.deskripsiWayang)
         var _gambarWayang = itemView.findViewById<ImageView>(R.id.gambarWayang)
-    }
 
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_recycler, parent, false)
@@ -39,5 +40,20 @@ class adapterRecView (private val listWayang: ArrayList<wayang>) : RecyclerView
         Picasso.get()
             .load(wayang.foto)
             .into(holder._gambarWayang)
+
+        holder._gambarWayang.setOnClickListener{
+          //  Toast.makeText(holder.itemView.context,wayang.nama,Toast.LENGTH_LONG).show()
+            onItemClickCallBack.onItemClicked(listWayang[position])
+        }
+    }
+    private lateinit var onItemClickCallBack: OnItemClickCallBack
+
+    interface OnItemClickCallBack {
+
+        fun onItemClicked(data:wayang)
+
+    }
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
+        this.onItemClickCallBack = onItemClickCallBack
     }
 }
